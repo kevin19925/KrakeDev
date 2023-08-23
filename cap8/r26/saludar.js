@@ -18,3 +18,10 @@ recuperarFloat = function (idComponente) {
 recuperarInt = function (idComponente) {
     return parseInt(document.getElementById(idComponente).value);
 }
+mostrarTexto=function(idComponente, mensaje){
+    let componente;
+    componente=document.getElementById(idComponente);
+    componente.innerText=mensaje;
+
+
+}
