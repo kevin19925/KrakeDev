@@ -1,5 +1,5 @@
 calcularValorDescuento=function(monto,porcentajeDescuento){
-    return monto*(1+(porcentajeDescuento/100));
+    return monto*(porcentajeDescuento/100);
 
 }
 calcularIva=function(monto){
