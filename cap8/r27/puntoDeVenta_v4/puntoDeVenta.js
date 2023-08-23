@@ -17,7 +17,7 @@ calcularValorTotal = function(){
     //3. Recuperar cantidad como int
     cantidad=recuperarInt ("txtCantidad");
     //4. Recuperar el porcentaje de descuento como int
-    porcentajeDescuento=recuperarFloat("txtPorcentajeDescuento");
+    porcentajeDescuento=recuperarInt("txtPorcentajeDescuento");
     //4. Invocar a calcularSubtotal y el retorno guardar en la variable valorSubtotal
    valorSubtotal=calcularSubtota(precioProducto,cantidad);
    
@@ -81,7 +81,7 @@ calcularValorTotal = function(){
             Si funciona, hacer un commit
         */ 
             mostrarTexto("lblResumen","Valor a pagar por "+cantidad+ " "+nombreProducto+" con  " +porcentajeDescuento+"%"+" de descuento: USD "  + valorTotal);
-limpiar();
+
         }   
 limpiar=function(){
     /*
@@ -94,6 +94,11 @@ limpiar=function(){
         mostrarTextoEnCaja("txtCantidad","0.0");
         mostrarTextoEnCaja("txtPrecio","0.0");
         mostrarTextoEnCaja("txtPorcentajeDescuento","0.0");
-
+        mostrarTexto("lblSubtotal","0.0");
+        mostrarTexto("lblDescuento","0.0");
+        mostrarTexto("lblValorIVA","0.0");
+        mostrarTexto("lblTotal","0.0");
+        mostrarTexto("lblResumen","");
+     
 }
 /* SI TODO FUNCIONA, HACER UN PUSH */
