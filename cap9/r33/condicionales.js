@@ -3,23 +3,23 @@ calcularTasaInteres=function (IngresoAnual) {
     let tasa;
     ingreso=parseFloat(IngresoAnual);
     if(ingreso<300000){
-tasa=16;
+tasa=;
     }
     else if(ingreso>=300000 && ingreso<500000){
 
-tasa=15;
+tasa=ingreso*0.15;
     }
      else if(ingreso>=500000 && ingreso<1000000){
 
-      tasa=14;  
+      tasa=ingreso*0.14;  
     }
     else if(ingreso>=1000000 && ingreso<2000000){
 
-        tasa=13;  
+        tasa= ingreso*0.13;  
     }
     else if(ingreso>=2000000 ){
 
-        tasa=12;  
+        tasa= ingreso*0.12 ; 
     }
     
     
@@ -41,6 +41,9 @@ else if(edad<30){
 return capacidad;
 }
 
+// el valor es depues del descuento 
+//es lo mismo valor =(precio* cantidad)-(precio* cantidad*0.2) 
+//que valor=precio*cantidad*0.98
 
 calcularDescuento=function(precio,cantidad){
 
