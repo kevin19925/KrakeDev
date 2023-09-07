@@ -3,7 +3,7 @@ calcularTasaInteres=function (IngresoAnual) {
     let tasa;
     ingreso=parseFloat(IngresoAnual);
     if(ingreso<300000){
-tasa=;
+tasa=ingreso*0.15;;
     }
     else if(ingreso>=300000 && ingreso<500000){
 
