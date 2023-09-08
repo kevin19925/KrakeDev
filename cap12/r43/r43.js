@@ -21,7 +21,7 @@ crearProducto = function () {
 
     let p1 = producto1.cantidad;
     let p2 = producto1.cantidad;
-    if (p1 == 2) { 
+    if (p1 == p2) { 
         console.log("tienen igaul stock " );
     }
     if (p1 > p2) {
