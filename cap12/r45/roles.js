@@ -82,102 +82,150 @@ buscarEmpleado = function (cedula) {
 
         if (empleado.cedula == cedula) {
             return empleado;
-            
+
         }
     }
     return null;
 }
 
-agregarEmpleado = function (empleado){
-    seAgrego=false;
+agregarEmpleado = function (empleado) {
+    seAgrego = false;
 
-    if(buscarEmpleado(empleado.cedula)==null){
+    if (buscarEmpleado(empleado.cedula) == null) {
         empleados.push(empleado);
-        seAgrego=true;
+        seAgrego = true;
     }
-    
+
     return seAgrego;
 }
 
 guardar = function () {
 
-    let cedula= recuperarTexto("txtCedula");
-    let   nombre=    recuperarTexto("txtNombre");
-     let  apellido = recuperarTexto("txtApellido");
-     let  sueldo = recuperarFloat("txtSueldo");
-    if(esValidoCampos()==true  ){
-        let empleado={};
-        empleado.cedula=cedula;
-        empleado.nombre=nombre;
-        empleado.apellido=apellido;
-        empleado.sueldo=sueldo;
-       if( agregarEmpleado(empleado)){
-        alert("se agrego correctamente ");
+    let cedula = recuperarTexto("txtCedula");
+    let nombre = recuperarTexto("txtNombre");
+    let apellido = recuperarTexto("txtApellido");
+    let sueldo = recuperarFloat("txtSueldo");
+    if (esValidoCampos() == true) {
+        let empleado = {};
+        empleado.cedula = cedula;
+        empleado.nombre = nombre;
+        empleado.apellido = apellido;
+        empleado.sueldo = sueldo;
+        if (agregarEmpleado(empleado)) {
+            alert("se agrego correctamente ");
+            mostrarEmpleados();
+            deshabilitar();
+           
+        }
+        else {
+            alert("ya exite el usuario con cedula :" + empleado.cedula);
+        }
+
+
+    }
+
+    if (esNuevo == false) {
+        let emplaedoBuscado = buscarEmpleado(cedula);
+      
+        emplaedoBuscado.nombre = nombre;
+        emplaedoBuscado.apellido = apellido;
+        emplaedoBuscado.sueldo = sueldo;
+        alert("MODIFICADO EXITOSAMENTE");
         mostrarEmpleados();
-        deshabilitar();
 
-       }
-       else{
-        alert("ya exite el usuario con cedula :"+empleado.cedula);
-       }
     }
-} 
+}
 
 
 
-esValidoCampos=function(){
-let valido = true;
-    let cedula= recuperarTexto("txtCedula");
-    let   nombre=    recuperarTexto("txtNombre");
-     let  apellido = recuperarTexto("txtApellido");
-     let  sueldo = recuperarFloat("txtSueldo");
-     alert(isNaN(cedula));
-     if(isNaN(cedula)){
- 
-         mostrarTexto("lblErrorCedula", "La cedula debe ser numeros");
-         valido = false;
-     }
-    if(cedula.length<10 &&  isNaN(cedula) ==false){
+esValidoCampos = function () {
+    let valido = true;
+    let cedula = recuperarTexto("txtCedula");
+    let nombre = recuperarTexto("txtNombre");
+    let apellido = recuperarTexto("txtApellido");
+    let sueldo = recuperarFloat("txtSueldo");
+
+    if (isNaN(cedula)) {
+        mostrarTexto("lblErrorCedula", "La cedula debe ser numeros");
         valido = false;
-         mostrarTexto("lblErrorCedula", "La cedula debe tener 10 digitos");
-        }
- 
-        if(nombre.length<3 && sonMayusculas(nombre)){
-            valido = false;
-         mostrarTexto("lblErrorNombre", "el nombre minimo 3 caracteres");
-        }
-         if(!sonMayusculas(nombre)){
-            valido = false;
-         mostrarTexto("lblErrorNombre", "el nombre solo en mayusculas");
-        }
-        if(apellido.length<3 && sonMayusculas(apellido)){
-            valido = false;
-         mostrarTexto("lblErrorApellido", "el Apellido minimo 3 caracteres");
-        }
-         if(!sonMayusculas(apellido)){
-            valido = false;
-         mostrarTexto("lblErrorApellido", "el Apellido solo en mayusculas");
-        }
- if(sueldo<400 || sueldo>5000){
-    valido = false;
-     mostrarTexto("lblErrorSueldo", "el sueldo debe estar entre 400 y 5000");
- }
- 
- 
-return valido;
+    }
+
+    if (cedula.length < 10 && isNaN(cedula) == false) {
+        valido = false;
+        mostrarTexto("lblErrorCedula", "La cedula debe tener 10 digitos");
+    }
+
+    if (nombre.length < 3 && sonMayusculas(nombre)) {
+        valido = false;
+        mostrarTexto("lblErrorNombre", "el nombre minimo 3 caracteres");
+    }
+
+    if (!sonMayusculas(nombre)) {
+        valido = false;
+        mostrarTexto("lblErrorNombre", "el nombre solo en mayusculas");
+    }
+
+    if (apellido.length < 3 && sonMayusculas(apellido)) {
+        valido = false;
+        mostrarTexto("lblErrorApellido", "el Apellido minimo 3 caracteres");
+    }
+
+    if (!sonMayusculas(apellido)) {
+        valido = false;
+        mostrarTexto("lblErrorApellido", "el Apellido solo en mayusculas");
+    }
+
+    if (sueldo < 400 || sueldo > 5000) {
+        valido = false;
+        mostrarTexto("lblErrorSueldo", "el sueldo debe estar entre 400 y 5000");
+    }
+
+
+    return valido;
 
 }
 
-sonMayusculas= function(palabra){
-    let valido=true;
-for (let i = 0; i < palabra.length; i++) {
-    if(!esMayuscula (palabra[i])){
-        valido=false;
-        return valido;
-break;
+sonMayusculas = function (palabra) {
+    let valido = true;
+    for (let i = 0; i < palabra.length; i++) {
+        if (!esMayuscula(palabra[i])) {
+            valido = false;
+            return valido;
+            break;
+
+        }
 
     }
-    
+    return valido;
 }
-return valido;
+
+ejecutarBusqueda = function () {
+    let cedula = recuperarTexto("txtBusquedaCedula");
+
+    newEmpleado = buscarEmpleado(cedula);
+    if (newEmpleado == null) {
+        alert("EMPLEADO NO EXISTE");
+
+    }
+    else {
+        mostrarTextoEnCaja("txtCedula", newEmpleado.cedula);
+        mostrarTextoEnCaja("txtNombre", newEmpleado.nombre);
+        mostrarTextoEnCaja("txtApellido", newEmpleado.apellido);
+        mostrarTextoEnCaja("txtSueldo", newEmpleado.sueldo);
+        ejecutarNuevo();
+        esNuevo=false;
+        
+    }
+
+}
+limpiar=function(){
+
+    mostrarTextoEnCaja("txtCedula", "");
+    mostrarTextoEnCaja("txtNombre", "");
+    mostrarTextoEnCaja("txtApellido", "");
+    mostrarTextoEnCaja("txtSueldo", "");
+    mostrarTextoEnCaja("txtBusquedaCedula", "");
+    esNuevo=false;
+    deshabilitar();
+
 }
