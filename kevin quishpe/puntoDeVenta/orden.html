@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="notas.css" />
+    <script src="orden.js"></script>
+    <script src="utilitarios.js"></script>
+    <script src="serviciosPuntoDeVenta.js"></script>
+</head>
+
+<body onload="mostrarPersonas()">
+    <div class="principal">
+        <div class="logoEscuela">
+            <img src="./imagenes/logoKrakeDev.png" width="80%" />
+        </div>
+
+        <div class="contenido">
+            <div class="titulo">
+                PUNTO DE VENTA
+            </div>
+
+            <div class="ingresoDatos">
+                <div class="tituloCampo">
+                    Nombre
+                </div>
+                <div>
+                    <input type="text" class="cajaTexto" id="txtNombre"/>
+                    <div class="error" id="lblError1"></div>
+                </div>
+            </div>
+           
+            <div class="ingresoDatos">
+                <div class="tituloCampo">
+                    Edad 
+                </div>
+                <div>
+                    <input type="text" class="cajaTexto" id="txtEdad"/>
+                    <div class="error" id="lblError2"></div>
+                </div>
+            </div>
+            <div class="botones">
+                <div class="contenedorBoton">
+                    <input type="button" value="Guardar"
+                     class="estiloBoton" onclick="agregarPersona();" />
+
+                     <input type="button" value=" menor"
+                     class="estiloBoton" onclick="encontrarMenor();" />
+
+                     <input type="button" value="mayor"
+                     class="estiloBoton" onclick="encontrarMayor();" />
+                </div>
+             </div>
+        </div>
+        <div class="areaResultado">
+
+           
+            <div class="imagenResultado">
+                <div id="tablaPersona" class="areaTabla">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
