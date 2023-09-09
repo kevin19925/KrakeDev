@@ -1,7 +1,7 @@
 let empleados = [
     { cedula: "1714616123", nombre: "John", apellido: "Cena", sueldo: 500.0 },
     { cedula: "0914632123", nombre: "Luisa", apellido: "Gonzalez", sueldo: 900.0 },
-    { cedula: "1718625989", nombre: "kevin", apellido: "quihspe", sueldo: 700.0 }
+    { cedula: "1718625989", nombre: "kevin", apellido: "quihspe", sueldo: 800.0 }
 ]
 
 let esNuevo = false;
@@ -227,5 +227,43 @@ limpiar=function(){
     mostrarTextoEnCaja("txtBusquedaCedula", "");
     esNuevo=false;
     deshabilitar();
+
+}
+
+buscarPorRol=function(){
+
+    let cedula = recuperarTexto("txtBusquedaCedulaRol");
+    let newEmpleado=buscarEmpleado(cedula);
+    alert(cedula);
+
+    if(newEmpleado==null){
+        alert("EMPLEADO NO EXISTE CON CI :" +cedula);
+
+    }else{
+    mostrarTexto("infoCedula", newEmpleado.cedula);
+    mostrarTexto("infoNombre", newEmpleado.apellido+" "+newEmpleado.apellido);
+    mostrarTexto("infoSueldo", newEmpleado.sueldo);
+    }
+}
+
+calcularAporteEmpleado=function(sueldo){
+    return (sueldo*0.0945)
+
+}
+calcularValorAPagar=function(sueldo,aporte,descuento){
+
+return (sueldo-aporte-descuento);
+}
+
+calcularRol=function(){
+let sueldo=recuperarFloatDiv("infoSueldo");
+let descuento=recuperarFloat("txtDescuentos");
+
+if(descuento>0 && descuento<sueldo){
+let aporte =calcularAporteEmpleado(sueldo);
+let valor=calcularValorAPagar(sueldo,aporte,descuento);
+mostrarTexto("infoIESS", aporte);
+mostrarTexto("infoPago", valor);
+}
 
 }
