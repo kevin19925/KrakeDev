@@ -9,11 +9,17 @@ mostrarTexto=function(idComponente,mensaje){
     componente=document.getElementById(idComponente);
     componente.innerText = mensaje;
 }
+mostrarTextoTabla=function(idComponente,mensaje){
+    let componente;
+    componente=document.getElementById(idComponente);
+    componente.innerHTML = mensaje;
+}
 mostrarTextoEnCaja = function(idComponente,mensaje){
     let componente;
     componente=document.getElementById(idComponente);
     componente.value = mensaje;
 }
+
 
 recuperarTexto=function(idComponente){
     let componente;
@@ -22,6 +28,7 @@ recuperarTexto=function(idComponente){
     valorIngresado=componente.value;
     return valorIngresado;
 }
+
 
 recuperarInt = function(idComponente){
    let valorCaja= recuperarTexto(idComponente);

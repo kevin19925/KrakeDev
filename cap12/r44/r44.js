@@ -120,7 +120,7 @@ mostrarContenido = function (lista) {
 
     contenido += "</table>";
 
-    return contenido;
+   
 }
 
 
