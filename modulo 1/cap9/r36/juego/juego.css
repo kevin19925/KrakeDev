@@ -1,0 +1,69 @@
+body{
+  background-color: blueviolet;
+    background-size: cover;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.btn{
+
+
+    width: 200px;
+    height: 80px;
+    font-size: 30px;
+    background-color: gray;
+}
+
+img{
+
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    
+    
+}
+
+
+.imgj1{
+   
+    margin: 20px;
+    padding: 10px;
+
+}
+
+
+.jugador{
+
+display: flex;
+flex-direction: column;
+flex: 1;
+margin: 20px;
+
+
+
+
+}
+.resultados{
+    margin: 200px;
+   
+    font-size: 40px;
+    color: aqua;
+}
+.panel{
+
+    display: flex;
+    flex: auto;
+flex-direction: row;
+flex: 1;
+margin: 20px;
+
+}
+h2{
+
+    font-size: 30px;
+    color: brown;
+    background-color: aliceblue;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+

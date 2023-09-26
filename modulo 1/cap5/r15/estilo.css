@@ -1,0 +1,32 @@
+body{
+
+    background-color: rgb(171, 255, 227);
+}
+
+.centro{
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+margin-top: 200px;
+
+
+}
+.cuadro{
+
+    background-color: rgb(58, 126, 228);
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+   padding: 30px;
+}
+
+.titulo{
+    font-size: 30px;
+    color: brown;
+}
+
+
+
+
+

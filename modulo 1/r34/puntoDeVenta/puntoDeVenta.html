@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="notas.css" />
+    <script src="puntoDeVenta.js"></script>
+    <script src="utilitarios.js"></script>
+    <script src="serviciosPuntoDeVenta.js"></script>
+</head>
+
+<body>
+    <div class="principal">
+        <div class="logoEscuela">
+            <img src="./imagenes/logoKrakeDev.png" width="80%" />
+        </div>
+
+        <div class="contenido">
+            <div class="titulo">
+                PUNTO DE VENTA
+            </div>
+
+            <div class="ingresoDatos">
+                <div class="tituloCampo">
+                    Producto
+                </div>
+                <div>
+                    <input type="text" class="cajaTexto" id="txtProducto"/>
+                    <div class="error" id="lblError1"></div>
+                </div>
+            </div>
+           
+            <div class="ingresoDatos">
+                <div class="tituloCampo">
+                    Cantidad
+                </div>
+                <div>
+                    <input type="text" class="cajaTexto" id="txtCantidad"/>
+                    <div class="error" id="lblError2"></div>
+                </div>
+            </div>
+            <div class="ingresoDatos">
+                <div class="tituloCampo">
+                    Precio
+                </div>
+                <div>
+                    <input type="text" class="cajaTexto" id="txtPrecio"/>
+                    <div class="error" id="lblError3"></div>
+                </div>
+            </div>
+            <div class="botones">
+                <div class="contenedorBoton">
+                    <input type="button" value="TOTAL"
+                     class="estiloBoton" onclick="calcularValorTotal();" />
+
+                     <input type="button" value="LIMPIAR"
+                     class="estiloBoton" onclick="limpiar();" />
+                </div>
+             </div>
+        </div>
+        <div class="areaResultado">
+            <div class="resultado">
+            
+                   
+                    
+                    <h3 id="lblSubtotal"> Subtotal  : 0.0</h3> </h3>
+                  
+                    <h3 id="lblDescuento">Descuento: 0.0</h3>
+             
+                    <h3 id="lblValorIVA">IVA 12% :0.0</h3>
+                 
+                    <h3 id="lblTotal"> Total: 0.0</h3>
+                
+        
+       
+
+                
+            </div>
+           
+            <div class="imagenResultado">
+                <img src="./imagenes/notas.png" width="50%" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

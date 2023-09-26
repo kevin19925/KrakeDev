@@ -1,0 +1,64 @@
+body{
+background-color: blueviolet;
+background-image: url(https://img.lalr.co/cms/2022/02/16092725/Ferrari_F40_LM_-_M5377-LM-00007_4000x2677_crop_center.jpg?size=xl&ratio=r40_21);
+background-repeat: repeat;
+background-size: cover;
+
+}
+
+.titulo{
+
+    font-size: 30px;
+    color: rgb(255, 247, 240);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.opc{
+
+font-size: 20px;
+color: aliceblue;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+padding: 20px;
+display: flex;
+flex-direction: row;
+
+}
+
+    
+
+.acerca{
+       
+        font-size: 20px;
+        color:beige;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+    }
+        
+.logo{
+width: 200px;
+height: 200px;
+margin: 20px;
+
+
+}
+
+.contenedorimg{
+    background-color: bisque;
+    margin: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+
+}
+        
