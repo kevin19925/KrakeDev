@@ -5,16 +5,9 @@ public class TestAuto {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	    Auto auto1 = new Auto();
-        Auto auto2 = new Auto();
+	    Auto auto1 = new Auto( "Ford",2021,2000.0);
+        Auto auto2 = new Auto("Chevrolet",2024,3000742.0);
 
-        auto1.setMarca( "Ford"); 
-        auto1.setAnio(2021);
-        auto1.setPrecio(20000.0);
-
-        auto2.setMarca("Chevrolet");
-        auto2.setAnio( 20240);
-        auto2.setPrecio(30000.0);
 
         // Mostrar los valores de los atributos de los dos autos en consola
         System.out.println("Auto 1:");

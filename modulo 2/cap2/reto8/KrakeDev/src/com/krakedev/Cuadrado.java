@@ -3,7 +3,13 @@ package com.krakedev;
 public class Cuadrado {
 	 private double lado;
 	 
-	 public double calcularArea() {
+	 
+	 
+	 public Cuadrado(double lado) {
+		this.lado = lado;
+	}
+
+	public double calcularArea() {
 		return Math.pow(lado,2);
 	}
 	

@@ -4,6 +4,12 @@ public class Rectangulo {
 	// atributos
 private double altura=0;
 private double base=0;
+
+
+public Rectangulo(double altura, double base) {
+	this.altura = altura;
+	this.base = base;
+}
 //metodo para calcular el perimetro
 public double calculaePerimetro()
 {
