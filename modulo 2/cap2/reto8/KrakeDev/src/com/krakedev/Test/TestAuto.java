@@ -1,5 +1,5 @@
-package com.krakedev;
-
+package com.krakedev.Test;
+import com.krakedev.Auto;
 
 public class TestAuto {
 

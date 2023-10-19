@@ -1,4 +1,6 @@
-package com.krakedev;
+package com.krakedev.Test;
+
+import com.krakedev.Rectangulo;
 
 public class TestRectangulo {
 
