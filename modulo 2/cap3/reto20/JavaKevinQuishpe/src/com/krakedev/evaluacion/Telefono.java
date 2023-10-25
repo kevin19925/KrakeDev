@@ -8,7 +8,11 @@ public class Telefono {
     public Telefono(String numero, String tipo) {
         this.numero = numero;
         this.tipo = tipo;
-        this.estado = validarTelefono(numero, tipo) ? "C" : "E";
+        if (validarTelefono(numero, tipo)) {
+            this.estado = "C";
+        } else {
+            this.estado = "E";
+        }
     }
 
     public String getNumero() {
@@ -25,9 +29,13 @@ public class Telefono {
 
     private boolean validarTelefono(String numero, String tipo) {
         if (numero != null && tipo != null) {
-            if ((tipo.equals("Móvil") || tipo.equals("Convencional")) && numero.length() == 10) {
+            if (tipo.equals("Movil") && numero.length() == 10) {
                 return true;
             }
+            if (( tipo.equals("Convencional")) && numero.length() == 7) {
+                return true;
+            }
+            
         }
         return false;
     }
