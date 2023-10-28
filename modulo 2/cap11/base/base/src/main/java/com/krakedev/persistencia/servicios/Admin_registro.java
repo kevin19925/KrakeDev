@@ -2,11 +2,15 @@ package com.krakedev.persistencia.servicios;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import org.apache.logging.log4j.LogManager;
 
 import org.apache.logging.log4j.Logger;
 
+import com.krakedev.persistencia.entidades.Empleado;
 import com.krakedev.persistencia.entidades.Registro_entrada;
 import com.krakedev.persistencia.utils.ConexionBDD;
 
@@ -145,6 +149,98 @@ public class Admin_registro {
 				throw new Exception("error en la base de datos");
 			}
 		}
-
+		
 	}
+	
+	
+	
+	
+
+	public static Empleado buscarcodigo(int codigo_empleado) throws Exception {
+		Empleado empleadoencontrado = new Empleado();
+		Connection con = null;
+		PreparedStatement ps;
+		ResultSet rs = null;
+		try {
+			con = ConexionBDD.conectar();
+			System.out.println("buqueda pk");
+
+			ps = con.prepareStatement("SELECT * FROM empleados "
+					+ "	WHERE codigo_empleado =?");
+			
+			ps.setInt(1, codigo_empleado);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int codigo =rs.getInt("codigo_empleado");
+				String nombre1 = rs.getString("nombre");
+				
+				
+				Empleado u = new Empleado();
+				u.setCodigo_empleado(codigo);
+				u.setNombre(nombre1);
+				
+				empleadoencontrado=u;
+			}
+
+		} catch (Exception e) {
+			LOGGER.error("Error al consultar por cedula pk ", e);
+			throw new Exception("Error al consultar por cedula pk u");
+
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				LOGGER.error("Error con la base de datos", e);
+				throw new Exception("Error con la base");
+			}
+		}
+
+		return empleadoencontrado;
+	}
+
+	
+	public static ArrayList<Empleado> buscarNombres(String nombre) throws Exception {
+		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+		Empleado empleadoencontrado = new Empleado();
+		Connection con = null;
+		PreparedStatement ps;
+		ResultSet rs = null;
+		try {
+			con = ConexionBDD.conectar();
+			System.out.println("buscra una lista ");
+
+			ps = con.prepareStatement("select * from empleados where nombre like ?");
+			ps.setString(1, '%' + nombre + '%');
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int codigo =rs.getInt("codigo_empleado");
+				String nombre1 = rs.getString("nombre");
+				
+				
+				Empleado u = new Empleado();
+				u.setCodigo_empleado(codigo);
+				u.setNombre(nombre1);
+				
+				empleados.add(u);
+			}
+
+		} catch (Exception e) {
+			LOGGER.error("Error al consultar por apellido de usuario", e);
+			throw new Exception("Error al consultar por apellido de usuario");
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				LOGGER.error("Error con la base de datos", e);
+				throw new Exception("Error con la base de datos");
+			}
+		}
+
+		return empleados;
+	}
+	
+	
 }
