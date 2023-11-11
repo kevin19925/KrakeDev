@@ -1,0 +1,5 @@
+-- descargar tomcat y dirigirse a la carpeta alevantar el servidor  con
+startup.bat
+- las paguinas se publican en webapps
+-- para parar el servicio es
+** shutdown
