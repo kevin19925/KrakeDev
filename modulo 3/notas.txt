@@ -16,3 +16,5 @@ para iniciar
 *firebase init
 -para subor 
 firebase deploy
+
+*** en inventarios se utiizo arquetipo de webapp-j2ee13
