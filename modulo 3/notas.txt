@@ -3,3 +3,16 @@ startup.bat
 - las paguinas se publican en webapps
 -- para parar el servicio es
 ** shutdown
+para  revisar version 
+** node -v
+--- siempre para que se suba debes hacer 
+
+intalar 
+npm install -g firebase-tools
+
+-logearnos 
+*firebase login
+para iniciar 
+*firebase init
+-para subor 
+firebase deploy
