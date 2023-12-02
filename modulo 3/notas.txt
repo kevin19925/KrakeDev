@@ -18,3 +18,9 @@ para iniciar
 firebase deploy
 
 *** en inventarios se utiizo arquetipo de webapp-j2ee13
+
+se debe cambiar en context y server
+ademas en la conexion en java en data sourse 
+despues configurar el servelt en webapp eclipce en web.xml
+depsues configurar el pom conlas dependencias 
+ 
