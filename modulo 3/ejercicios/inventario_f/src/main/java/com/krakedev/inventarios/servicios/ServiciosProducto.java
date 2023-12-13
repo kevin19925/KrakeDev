@@ -45,14 +45,14 @@ public class ServiciosProducto {
 	@Path("crear")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON) // con este formato va a recibir
-	public Response crear(Proveedor pro) {
+	public Response crear(Producto pro) {
 
 		
-		ProveedoresBDD proveedor =new ProveedoresBDD();
+		ProductoBDD producto = new ProductoBDD();
 		
 		
 		try {
-			proveedor.insertar(pro);
+			producto.insertar(pro);
 			return Response.ok().build();
 			
 		} catch (KrakeDevExeption e) {
@@ -62,7 +62,7 @@ public class ServiciosProducto {
 			
 		}
 		finally {
-			System.out.println(">>> servicos " +pro);
+			System.out.println(">>> sobjeto de servicios >> " +pro);
 		}
 		
 	}

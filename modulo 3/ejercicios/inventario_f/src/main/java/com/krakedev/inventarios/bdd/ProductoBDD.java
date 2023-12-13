@@ -101,7 +101,7 @@ public class ProductoBDD {
 	}
 	
 
-	public void insertar(Proveedor proveedor) throws KrakeDevExeption
+	public void insertar(Producto producto) throws KrakeDevExeption
 
 	{
 	
@@ -111,16 +111,18 @@ public class ProductoBDD {
 		
 		try {
 			con = ConexionBDD.ontenerConecion();
-			ps=con.prepareStatement("INSERT INTO proveedores("
-					+ "	identificador, tipo_documento, nombre, telefono, correo, direccion)"
-					+ "	VALUES (?, ?, ?, ?, ?, ?);");
+			ps=con.prepareStatement("INSERT INTO public.productos"
+					+ "	 (nombre, udm, precio_venta, tiene_iva, coste, categoria, stock )"
+					+ "	VALUES ( ?, ?, ?, ?, ?, ?, ?);");
 			
-			ps.setString(1,proveedor.getIdentificador());
-			ps.setString(2,proveedor.getTipoDocumento().getCodigo().toString());
-			ps.setString(3,proveedor.getNombre());
-			ps.setString(4,proveedor.getTelefono());
-			ps.setString(5,proveedor.getCorreo());
-			ps.setString(6,proveedor.getDireccion());
+			ps.setString(1,producto.getNombre());
+			ps.setString(2,producto.getUnidadMedida().getCodigo());
+			ps.setBigDecimal(3,producto.getPrecioVenta());
+			ps.setBoolean(4,producto.isTieneIva());
+			ps.setBigDecimal(5,producto.getCoste());
+			ps.setInt(6,producto.getCategoria().getCodigo());
+			ps.setInt(7,producto.getStock());
+			System.out.println(">>>>>>>>>>>>>>>>> cadena >>>>" +ps);
 			ps.executeUpdate();
 		
 			
