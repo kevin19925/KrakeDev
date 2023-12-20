@@ -41,7 +41,7 @@ public class PedidosBDD {
 			
 			ps.setString(1,pedido.getProveedor().getIdentificador());
 			ps.setDate(2, fechaSQL);
-			ps.setString(3, "R");
+			ps.setString(3, "S");
 			ps.executeUpdate();
 			claveGenerada=ps.getGeneratedKeys();
 			if(claveGenerada.next()) {
@@ -64,8 +64,6 @@ public class PedidosBDD {
 			psDetalle.execute();
 			}
 			
-			
-			
 		} catch (KrakeDevExeption e) {
 			e.printStackTrace();
 			throw e;
@@ -87,4 +85,64 @@ public class PedidosBDD {
 		
 		
 	}
+	
+	public void actualizar(Pedido pedido) throws KrakeDevExeption
+
+	{
+	
+		Connection con = null;
+		PreparedStatement ps=null;
+		PreparedStatement psDetalle=null;
+		ResultSet rs=null;
+		ResultSet claveGenerada =null;
+		int codigo=0 ;
+		Date fechaActual = new Date();
+
+        
+        java.sql.Date fechaSQL = new java.sql.Date(fechaActual.getTime());
+        
+		try { 
+			con = ConexionBDD.ontenerConecion();
+			ps=con.prepareStatement("UPDATE cabecera_pedido SET  estado = ? WHERE numero = ? ");
+				
+
+			ps.setString(1, "R");
+			ps.setInt(2,pedido.getCodigo());
+			
+			
+			System.out.println("cogiho cabecera>>>"+pedido.getCodigo());
+			ps.execute();
+			
+			for (DetallePedido det : pedido.getDetalles()) {
+				psDetalle=con.prepareStatement("UPDATE  detalle_pedido set "
+						+ "	 cantidad_recibida = ? where codigo = ?  ");
+						
+				psDetalle.setInt(1, det.getCantidadRecibida());
+				psDetalle.setInt(2, det.getCodigo());
+			psDetalle.execute();
+			}
+			
+			
+		} catch (KrakeDevExeption e) {
+			e.printStackTrace();
+			throw e;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new KrakeDevExeption("Error al actulizar pedido " +e.getMessage());
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			System.out.println("actualizar pedido >>>>>>"+ps);
+		}
+		
+		
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -64,6 +65,31 @@ public class ServiciosPedidos {
 		}
 		finally {
 			System.out.println(">>> objeto de servicios pedido >> " +pedido);
+		}
+		
+	}
+	
+	@Path("recibir")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON) // con este formato va a recibir
+	public Response recibir(Pedido pedido) {
+
+		
+		PedidosBDD p = new PedidosBDD () ;
+		
+		
+		try {
+			p.actualizar(pedido);
+			return Response.ok().build();
+			
+		} catch (KrakeDevExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.serverError().build();
+			
+		}
+		finally {
+			System.out.println(">>> objeto de servicios pedido actualizr >> " +pedido);
 		}
 		
 	}
