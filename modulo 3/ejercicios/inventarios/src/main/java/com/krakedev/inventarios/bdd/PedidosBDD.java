@@ -100,6 +100,7 @@ public class PedidosBDD {
 
         
         java.sql.Date fechaSQL = new java.sql.Date(fechaActual.getTime());
+        java.sql.Timestamp fechaHoraSQl = new    java.sql.Timestamp(fechaActual.getTime());
         
 		try { 
 			con = ConexionBDD.ontenerConecion();
@@ -110,7 +111,7 @@ public class PedidosBDD {
 			ps.setInt(2,pedido.getCodigo());
 			
 			
-			System.out.println("cogiho cabecera>>>"+pedido.getCodigo());
+			System.out.println("codigoo cabecera>>>"+pedido.getCodigo());
 			ps.execute();
 			
 			for (DetallePedido det : pedido.getDetalles()) {
@@ -119,7 +120,22 @@ public class PedidosBDD {
 						
 				psDetalle.setInt(1, det.getCantidadRecibida());
 				psDetalle.setInt(2, det.getCodigo());
+				
+				
 			psDetalle.execute();
+			
+			psDetalle=con.prepareStatement("INSERT INTO public.historial_stock( "
+					+ "	fecha, referencia, producto, cantidad)"
+					+ "	VALUES (?, ?, ?, ?);");
+			
+			psDetalle.setTimestamp(1, fechaHoraSQl);
+			psDetalle.setString(2, "PEDIDO "+pedido.getCodigo());
+			psDetalle.setInt(3, det.getProducto().getCodigo());
+			psDetalle.setInt(4, det.getCantidadRecibida());
+			
+		psDetalle.execute();
+			
+			
 			}
 			
 			
