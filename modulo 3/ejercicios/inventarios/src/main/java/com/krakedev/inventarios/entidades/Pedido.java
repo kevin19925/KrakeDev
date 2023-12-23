@@ -19,10 +19,21 @@ public class Pedido {
 	}
 	
 	public Pedido() {
-		
+		this.detalles= new ArrayList<DetallePedido>();
+	}
+	public void anadirDetalle(DetallePedido detalle) {
+		detalles.add(detalle);
 	}
 	
-	
+
+	public Pedido(int codigo, Proveedor proveedor, Date fecha, EstadoPedido estado, ArrayList<DetallePedido> detalles) {
+		super();
+		this.codigo = codigo;
+		this.proveedor = proveedor;
+		this.fecha = fecha;
+		this.estado = estado;
+		this.detalles = detalles;
+	}
 
 	public ArrayList<DetallePedido> getDetalles() {
 		return detalles;

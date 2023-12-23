@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -42,6 +43,7 @@ public class ServiciosProducto {
 		
 	}
 	
+	
 	@Path("crear")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON) // con este formato va a recibir
@@ -67,4 +69,48 @@ public class ServiciosProducto {
 		
 	}
 	
+	@Path("actualizar")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON) // con este formato va a recibir
+	public Response actualizar(Producto pro) {
+
+		
+		ProductoBDD producto = new ProductoBDD();
+		
+		
+		try {
+			producto.actualizar(pro);
+			return Response.ok().build();
+			
+		} catch (KrakeDevExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.serverError().build();
+			
+		}
+		finally {
+			System.out.println(">>> objeto de servicios >> " +pro);
+		}
+		
+	}
+	@Path("buscarId/{cadena}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON) // con este formato va a recibir
+	public Response recuperarPorId(@PathParam("cadena") int id) {
+
+		
+		ProductoBDD producto =new ProductoBDD();
+		ArrayList<Producto> lista=null;
+		try {
+			lista= producto.buscarID(id);
+			return Response.ok(lista).build();
+			
+		} catch (KrakeDevExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.serverError().build();
+			
+		}
+		
+	}
 }

@@ -40,6 +40,26 @@ public class ServiciosProveedor {
 		}
 		
 	}
+	@Path("buscarId/{cadena}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON) // con este formato va a recibir
+	public Response recuperarId(@PathParam("cadena") String cadena) {
+
+		
+		ProveedoresBDD proveedor =new ProveedoresBDD();
+		ArrayList<Proveedor> lista=null;
+		try {
+			lista= proveedor.buscarId(cadena);
+			return Response.ok(lista).build();
+			
+		} catch (KrakeDevExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.serverError().build();
+			
+		}
+		
+	}
 	
 	@Path("crear")
 	@POST

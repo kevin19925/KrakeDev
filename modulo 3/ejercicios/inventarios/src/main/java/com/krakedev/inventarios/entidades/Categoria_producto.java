@@ -3,13 +3,34 @@ package com.krakedev.inventarios.entidades;
 public class Categoria_producto {
 	private int codigo;
 	private String nombre;
-
+	private int codigo_padre;
 	public Categoria_producto(int codigo, String nombre) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 	
 	}
+
+	
+	
+	public Categoria_producto(int codigo, String nombre, int codigo_padre) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.codigo_padre = codigo_padre;
+	}
+
+
+
+	public int getCodigo_padre() {
+		return codigo_padre;
+	}
+
+
+	public void setCodigo_padre(int codigo_padre) {
+		this.codigo_padre = codigo_padre;
+	}
+
 
 	public Categoria_producto() {
 		
@@ -35,7 +56,7 @@ public class Categoria_producto {
 
 	@Override
 	public String toString() {
-		return "Categoria_producto [codigo=" + codigo + ", nombre=" + nombre + "]";
+		return "Categoria_producto [codigo=" + codigo_padre + ", nombre=" + nombre + "]";
 	}
 
 

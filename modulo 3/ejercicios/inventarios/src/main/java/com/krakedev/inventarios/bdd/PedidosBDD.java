@@ -6,10 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.krakedev.inventarios.entidades.DetallePedido;
+import com.krakedev.inventarios.entidades.EstadoPedido;
 import com.krakedev.inventarios.entidades.Pedido;
+import com.krakedev.inventarios.entidades.Producto;
+import com.krakedev.inventarios.entidades.Proveedor;
+import com.krakedev.inventarios.entidades.TipoDocumento;
 import com.krakedev.inventarios.excepciones.KrakeDevExeption;
 import com.krakedev.inventarios.utils.ConexionBDD;
 
@@ -159,6 +164,81 @@ public class PedidosBDD {
 		}
 		
 		
+	}
+
+	
+	 
+	public ArrayList<Pedido> buscarPedidosPorProveedor(String subcadena) throws KrakeDevExeption
+
+	{
+		ArrayList<Pedido> lista = new ArrayList<Pedido>();
+		Connection con = null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		Pedido newPedido= new Pedido();
+		try {
+			con = ConexionBDD.ontenerConecion();
+			ps=con.prepareStatement("SELECT cp.numero AS numero_pedido, cp.proveedor, cp.fecha, ep.codigo ,ep.descripcion AS estado_pedido, "
+					+ "       dp.codigo AS codigo_detalle, dp.producto AS codigo_producto, pr.nombre AS nombre_producto, "
+					+ "       dp.cantidad_solicitada, dp.cantidad_recibida, CAST (dp.subTotal as decimal(6,2)) "
+			
+					+ "FROM cabecera_pedido cp "
+					+ "JOIN detalle_pedido dp ON cp.numero = dp.cabecera_pedido "
+					+ "JOIN estado_pedido ep ON cp.estado = ep.codigo "
+					+ "JOIN productos pr ON dp.producto = pr.codigo_producto "
+					+ "WHERE cp.proveedor = ? ");
+			ps.setString(1,subcadena);
+			System.out.println(">> cadena >>"+ps);
+			
+			rs=ps.executeQuery();
+		
+			while (rs.next()) {
+				newPedido.setCodigo(rs.getInt(1));
+				Proveedor pro = new Proveedor();
+				pro.setIdentificador(rs.getString(2));
+				newPedido.setProveedor(pro);
+				newPedido.setFecha(rs.getDate(3));
+				newPedido.setEstado(new EstadoPedido(rs.getString(4), rs.getString(5)));
+				
+				DetallePedido detallePedido = new DetallePedido();
+				detallePedido.setCodigo(rs.getInt(6));
+				
+				
+				Producto producto = new Producto();
+				producto.setCodigo(rs.getInt(7));
+				producto.setNombre(rs.getString(8));
+				detallePedido.setProducto(producto);
+				detallePedido.setCantidadSolicitada(rs.getInt(9));
+				detallePedido.setCantidadRecibida(rs.getInt(10));
+				
+			BigDecimal num = rs.getBigDecimal(11);
+				detallePedido.setSubtotal(num);
+				
+				newPedido.anadirDetalle(detallePedido);
+				lista.add(newPedido);
+			}
+			
+			
+		} catch (KrakeDevExeption e) {
+			e.printStackTrace();
+			throw e;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new KrakeDevExeption("Error al  buscarPedidosPorProveedor " +e.getMessage());
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return lista;
+
 	}
 	
 }

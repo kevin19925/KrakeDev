@@ -63,6 +63,53 @@ public class ProveedoresBDD {
 
 	}
 	
+	public ArrayList<Proveedor> buscarId(String subcadena) throws KrakeDevExeption
+
+	{
+		ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
+		Connection con = null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		Proveedor proveedor=null;
+		try {
+			con = ConexionBDD.ontenerConecion();
+			ps=con.prepareStatement("select prov.identificador,prov.tipo_documento, td.descripcion,"
+					+ " prov.nombre, prov.telefono,prov.correo, prov.direccion from proveedores prov , "
+					+ " tipo_documentos td where prov.tipo_documento=td.codigo and prov.identificador=?");
+			ps.setString(1,subcadena);
+			rs=ps.executeQuery();
+		
+			System.out.println(ps);
+			while (rs.next()) {
+				TipoDocumento tipoDoc = new TipoDocumento(rs.getString(2), rs.getString(3));
+				proveedor=new Proveedor(rs.getString(1), tipoDoc,rs.getString("nombre"),rs.getString("telefono"),rs.getString("correo"),rs.getString("direccion"));
+				
+				//System.out.println(rs.getString(1));
+				lista.add(proveedor);
+			}
+			
+			
+		} catch (KrakeDevExeption e) {
+			e.printStackTrace();
+			throw e;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new KrakeDevExeption("Error al consultar detalle: " +e.getMessage());
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return lista;
+
+	}
 
 	public void insertar(Proveedor proveedor) throws KrakeDevExeption
 
