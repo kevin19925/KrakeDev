@@ -1,0 +1,4 @@
+// saber version
+node -v
+// crear proyecto 
+npx create-expo-app MiPrimerProyecto

@@ -7,23 +7,19 @@ return valorComponete;
 }*/
 
 // arrow functios
-recuperarTexto = (idComponente)=>{
-    let componente=document.getElementById(idComponente);
-let valorComponete=componente.value;
+recuperarTexto = (idComponente) => {
+  let componente = document.getElementById(idComponente);
+  let valorComponete = componente.value;
 
-return valorComponete;
+  return valorComponete;
 };
 
-recuperarEntero=(idComponente)=>{
+recuperarEntero = (idComponente) => {
+  let componente = document.getElementById(idComponente);
+  return parseInt(componente.value);
+};
 
-let componente=document.getElementById(idComponente);
-return (parseInt(componente.value))
-
-}
-
-recuperarFloat=(idComponente)=>{
-
-    let componente=document.getElementById(idComponente);
-    return (parseFloat(componente.value))
-    
-    }
+recuperarFloat = (idComponente) => {
+  let componente = document.getElementById(idComponente);
+  return parseFloat(componente.value);
+};

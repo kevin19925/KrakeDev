@@ -1,15 +1,27 @@
 <html lang="en">
-<head>
+  <head>
     <script src="funciones.js"></script>
     <script src="utilitarios.js"></script>
-    
-</head>
-<body>
+  </head>
+  <body>
     <h4>ingrese valor 1</h4>
-    <input type="text" id="txtValor1"/>
+    <input type="text" id="txtValor1" />
     <h4>ingrese valor 2</h4>
-    <input type="text" id="txtValor2"/>
-    <input type="button" value="Sumar" onclick="ejecutarSumar()"/>
-    <input type="button" value="Restar" onclick="ejecutarRestar()"/>
-</body>
+    <input type="text" id="txtValor2" />
+    <input type="button" value="Sumar" onclick="ejecutarOperacion(sumar)" />
+    <input type="button" value="Restar" onclick="ejecutarOperacion(restar)" />
+    <input
+      type="button"
+      value="multiplicar"
+      onclick="ejecutarOperacion((p1,p2)=>{return (p1*p2)})"
+    />
+    <input
+      type="button"
+      value="mayor"
+      onclick="ejecutarOperacion((p1,p2)=>{
+        return ((p1>p2)? p1:p2);
+    })"
+    />
+    <input type="button" value="test" onclick="testEjecutar()" />
+  </body>
 </html>
