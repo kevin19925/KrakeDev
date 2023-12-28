@@ -1,4 +1,18 @@
+///// extenciones
+React Native Snippet
+Bracket Pair Colorization Toggler
+Prettier - Code formatter // confi en file preferens save 
+ESLint
+Path Intellisenseexpo
+Path Autocomplete
+React Native React/Redux snippets
+
+
+
+
 // saber version
 node -v
 // crear proyecto 
 npx create-expo-app MiPrimerProyecto
+// servicios desde el telefono para ver la aplicacion 
+>npx expo start
