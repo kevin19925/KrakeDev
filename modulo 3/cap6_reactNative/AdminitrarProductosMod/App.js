@@ -9,6 +9,8 @@ import {
   Button,
   ScrollView,
   TouchableHighlight,
+  Modal,
+  Pressable,
 } from "react-native";
 const productos = [
   {
@@ -31,13 +33,33 @@ let indiceSeleccionado = -1;
 
 export default function App() {
   //
+  const [showModal, setShowModal] = useState(false);
+  const [deleteIndex, setDeleteIndex] = useState(-1);
 
+  //
   const [txtNombre, setTxtNombre] = useState("");
   const [txtCategoria, setTxtCategoria] = useState("");
   const [txtPrecioCompra, setPrecioCompra] = useState("");
   const [txtPrecioVenta, setPrecioVenta] = useState("");
   const [txtId, setId] = useState("");
   const [numElemetos, setnumElementos] = useState(productos.length);
+
+  const confirmDelete = (index) => {
+    setShowModal(true);
+    setDeleteIndex(index);
+  };
+
+  const cancelDelete = () => {
+    setShowModal(false);
+    setDeleteIndex(-1);
+  };
+
+  const deleteItem = () => {
+    productos.splice(deleteIndex, 1);
+    setnumElementos(productos.length);
+    setShowModal(false);
+    setDeleteIndex(-1);
+  };
 
   limpiar = () => {
     setTxtNombre("");
@@ -50,32 +72,34 @@ export default function App() {
 
   let ItemsProducto = ({ indice, producto }) => {
     return (
-      <TouchableHighlight
-        onPress={() => {
-          setId(producto.id + "");
-          setTxtNombre(producto.nombre);
-          setTxtCategoria(producto.categoria + "");
-          setPrecioCompra(producto.precioCompra + "");
-          setPrecioVenta(producto.precioVenta + "");
+      <View>
+        <TouchableHighlight
+          onPress={() => {
+            setId(producto.id + "");
+            setTxtNombre(producto.nombre);
+            setTxtCategoria(producto.categoria + "");
+            setPrecioCompra(producto.precioCompra + "");
+            setPrecioVenta(producto.precioVenta + "");
 
-          indiceSeleccionado = indice;
-          esNuevo = false;
-        }}
-      >
-        <View style={styles.itemProducto}>
-          <View style={styles.itemIndice}>
-            <Text style={styles.textoPrincipal}>{producto.id}</Text>
-          </View>
+            indiceSeleccionado = indice;
+            esNuevo = false;
+          }}
+          underlayColor="#98EAD4" // Color de fondo al presionar
+        >
+          <View style={styles.itemProducto}>
+            <View style={styles.itemIndice}>
+              <Text style={styles.textoPrincipal}>{producto.id}</Text>
+            </View>
 
-          <View style={styles.itemContenido}>
-            <Text style={styles.textoPrincipal}>{producto.nombre}</Text>
-            <Text style={styles.textoSecundario}>{producto.categoria}</Text>
-          </View>
-          <View style={styles.itemPrecio}>
-            <Text style={styles.txtPrecio}>{producto.precioVenta}</Text>
-          </View>
-          <View style={styles.itemBotones}>
-            {/* <Button
+            <View style={styles.itemContenido}>
+              <Text style={styles.textoPrincipal}>{producto.nombre}</Text>
+              <Text style={styles.textoSecundario}>{producto.categoria}</Text>
+            </View>
+            <View style={styles.itemPrecio}>
+              <Text style={styles.txtPrecio}>{producto.precioVenta}</Text>
+            </View>
+            <View style={styles.itemBotones}>
+              {/* <Button
               title="E"
               color="green"
               onPress={() => {
@@ -89,19 +113,37 @@ export default function App() {
                 esNuevo = false;
               }}
             ></Button> */}
-            <Button
-              title="X"
-              color="red"
-              onPress={() => {
-                indiceSeleccionado = indice;
-                productos.splice(indiceSeleccionado, 1);
-                setnumElementos(productos.length);
-                //console.log(indiceSeleccionado);
-              }}
-            ></Button>
+              <Button
+                title="X"
+                color="red"
+                onPress={() => confirmDelete(indice)}
+              ></Button>
+            </View>
           </View>
-        </View>
-      </TouchableHighlight>
+        </TouchableHighlight>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showModal}
+          onRequestClose={() => {
+            setShowModal(false);
+            setDeleteIndex(-1);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+                ¿Está seguro que quiere eliminar?
+              </Text>
+              <View style={styles.modalButtons}>
+                <Button title="Aceptar" onPress={deleteItem} />
+                <Button title="Cancelar" onPress={cancelDelete} />
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </View>
     );
   };
 
@@ -206,7 +248,6 @@ export default function App() {
           </View>
         </View>
       </ScrollView>
-
       <View style={styles.contenido}>
         <FlatList
           style={styles.lista}
@@ -342,4 +383,24 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     fontWeight: "bold",
   },
+  ////mdal
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+ 
+  
+
 });
