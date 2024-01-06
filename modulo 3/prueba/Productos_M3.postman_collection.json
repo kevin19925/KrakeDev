@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "93688978-62ce-4ba6-a9e4-fa7624279de3",
+		"name": "Productos_M3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24779656"
+	},
+	"item": [
+		{
+			"name": "Recuperar tipo documentos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/inventarios-1.0.0/rest/tiposdocumento/recuperar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inventarios-1.0.0",
+						"rest",
+						"tiposdocumento",
+						"recuperar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar proveedores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/inventarios-1.0.0/rest/proveedores/buscar/C",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inventarios-1.0.0",
+						"rest",
+						"proveedores",
+						"buscar",
+						"C"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/inventarios-1.0.0/rest/productos/buscar/Sa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inventarios-1.0.0",
+						"rest",
+						"productos",
+						"buscar",
+						"Sa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear productos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"codigo\": 3,\r\n        \"nombre\": \"Mayonesa\",\r\n        \"unidadMedida\": {\r\n            \"nombre\": \"kg\",\r\n            \"descripcion\": \"kilogramos\",\r\n            \"categoriaUnidadMedida\": null\r\n        },\r\n        \"precioVenta\": 0.95,\r\n        \"tieneIva\": true,\r\n        \"coste\": 0.8700,\r\n        \"categoria\": {\r\n            \"codigo\": 3,\r\n            \"nombre\": \"Salsas\",\r\n            \"categoriaPadre\": null\r\n        },\r\n        \"stock\": 10\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/inventarios-1.0.0/rest/productos/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inventarios-1.0.0",
+						"rest",
+						"productos",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear proveedor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"identificador\": \"175090\",\r\n        \"tipoDocumento\": {\r\n            \"codigo\": \"C\",\r\n            \"descripcion\": \"CEDULA\"\r\n        },\r\n        \"nombre\": \"Manuel\",\r\n        \"telefono\": \"0980305744\",\r\n        \"correo\": \"robert@gmail.com\",\r\n        \"direccion\": \"Chimbacalle\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/inventarios-1.0.0/rest/proveedores/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inventarios-1.0.0",
+						"rest",
+						"proveedores",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"proveedor\": {\r\n    \"identificador\": \"175089\"\r\n  },\r\n  \"detalles\": [\r\n    {\r\n      \"producto\": {\r\n        \"codigo\": 6,\r\n        \"precioVenta\": 0.5004\r\n      },\r\n      \"cantidadSolicitada\": 100\r\n    },\r\n    {\r\n      \"producto\": {\r\n        \"codigo\": 2,\r\n        \"precioVenta\": 0.95\r\n      },\r\n      \"cantidadSolicitada\": 50\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/inventarios-1.0.0/rest/pedidos/registrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inventarios-1.0.0",
+						"rest",
+						"pedidos",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recibir pedido",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo\":7,\r\n    \"detalles\":[\r\n {\r\n            \"codigo\":4,\r\n            \"producto\":{\r\n                \"codigo\":1,\r\n                \"precioVenta\":0.5804\r\n        },\r\n        \"cantidadRecibida\":100\r\n },\r\n{\r\n    \"codigo\":5,\r\n    \"producto\":{\r\n         \"codigo\":2,\r\n                \"precioVenta\":0.95\r\n    },\r\n    \"cantidadRecibida\":48\r\n}\r\n    ]\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/inventarios-1.0.0/rest/pedidos/recibir",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inventarios-1.0.0",
+						"rest",
+						"pedidos",
+						"recibir"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
