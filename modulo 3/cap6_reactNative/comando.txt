@@ -16,3 +16,39 @@ node -v
 npx create-expo-app MiPrimerProyecto
 // servicios desde el telefono para ver la aplicacion 
 >npx expo start
+
+///////////PARA UTILIZAR RNE
+npx create-expo-app ejemplosRNE
+
+npm install -g expo-cli@latest
+-----
+expo init ejemploRNE
+npm install @rneui/themed @rneui/base
+npm install react-native-vector-icons
+
+/// paguina de econos 
+https://oblador.github.io/react-native-vector-icons/
+
+//
+PROYECTO: notas
+NAVEGACION: stack
+npm install @react-navigation/native
+npm install @react-navigation/native-stack
+
+Usar React Native elements
+
+npm install- @rneui/themed @rneui/base
+npm install react-native-vector-icons
+////
+ npm install @react-navigation/drawer
+ npm install react-native-reanimated
+ npm install react-native-safe-area-context 
+ npm install react-native-gesture-handler
+
+import "react-native-gesture-handler":
+expo update
+expo start --clear
+
+////////
+otro 
+npx react-native init MyDrawer
