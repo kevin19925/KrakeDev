@@ -1,0 +1,7 @@
+// para crear un proyecto de node 
+npm init --y
+//intalar express
+npm install express
+///ejecutar archivo de node app.js
+///para paser body 
+npm install body-parser
