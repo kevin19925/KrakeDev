@@ -1,0 +1,8 @@
+// slecciono para poner crar un componete 
+para crear hijos se  selecciona el compoenete y se aplasta alt y donde quiero poner
+// para gama de colores
+ui colors
+// para gotero 
+seleciono el elemeto + aplsto i + y selecionao el emento del color 
+//para poner nombre en los colores 
+ sleciono pongo en lo 4 puntos  , en mas , y finalizar style
