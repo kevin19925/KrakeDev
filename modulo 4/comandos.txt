@@ -1,0 +1,33 @@
+///pull forzado
+
+git pull -f origin main --allow-unrelated-histories
+
+///subir lo que tu tienes al repòsitorio 
+
+git init
+git add .
+git commmit 
+//
+anademe esto al origin
+git  remote add origin https://github.com/kevin19925/nuevo-prueba.git
+//despues 
+git remote -v  // hay un getch pata crear cosas , y push ccmabiar
+
+/// si quieres hacer desde el desktop no puedes debes hacer mimso desde git bash el init 
+o el comiit si desde destop 
+pero remote desde el bash 
+git  remote add origin https://github.com/kevin19925/nuevo-prueba.git
+asi despues en destop ya te refleja
+
+/// git ignere
+
+se crea un archivo para poner ai los archivos que ignore
+
+.gitignore
+dentro de este archivo 
+puedes poner 
+hoja.txt
+//para carpeta
+conf/
+para archis con nombres 
+*.orig.*  /nomvres con la estructura dentro de los asteriscos
