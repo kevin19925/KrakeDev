@@ -21,14 +21,14 @@ export const saveContactRest = (contact) => {
     },
     // la estrctura que espera el rws el objeto
     body: JSON.stringify({
-      nombre: contact.name,
-      apellido: contact.surname,
-      cedula: contact.phoneNumber,
+      nombre: contact.nom,
+      apellido: contact.ape,
+      telefono: contact.tele,
     }),
   };
   fetch(url + "contactos", config)
     .then((res) => {
-      res.json();
+      return res.json();
     })
     .then((body) => {
       console.log(body);

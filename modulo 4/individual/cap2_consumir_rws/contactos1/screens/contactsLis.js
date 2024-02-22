@@ -23,8 +23,6 @@ export const ListaContactos = () => {
     setContactList(contactos);
   };
 
-
-  
   // flatList es como hacer un foreach
   return (
     <View>
