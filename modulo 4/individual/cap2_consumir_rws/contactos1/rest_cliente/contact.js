@@ -13,7 +13,7 @@ export const getAllConstac = (fnRefres) => {
     });
 };
 
-export const saveContactRest = (contact) => {
+export const saveContactRest = (contact, fnshowMessage) => {
   const config = {
     method: "POST",
     headers: {
@@ -31,6 +31,7 @@ export const saveContactRest = (contact) => {
       return res.json();
     })
     .then((body) => {
+      fnshowMessage();
       console.log(body);
     });
 };

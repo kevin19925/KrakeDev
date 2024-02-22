@@ -1,9 +1,9 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { Button, ListItem } from "@rneui/base";
+import { Button, ListItem, FAB } from "@rneui/base";
 import { useState } from "react";
 import { getLaptops } from "../rest_Laptops/Laptops";
 
-export const Lista = () => {
+export const Lista = ({ navigation }) => {
   const [ListaLaptops, setListaLaptops] = useState([]);
 
   refresList = (contactos) => {
@@ -26,7 +26,7 @@ export const Lista = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Button
         title="LIST"
         onPress={() => {
@@ -39,11 +39,21 @@ export const Lista = () => {
           return <ItemLaptops laptop={item}></ItemLaptops>;
         }}
       ></FlatList>
+      <FAB
+        title="+"
+        onPress={() => {
+          navigation.navigate("IngresoLaptopsNav");
+        }}
+      />
     </View>
   );
 };
 const styles = StyleSheet.create({
-  item: {
-    backgroundColor: "#F0F5D4",
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    flexDirection: "column", // eje pricipal es vertical
+    justifyContent: "flex-start",
+    alignItems: "stretch", // orisontal
   },
 });

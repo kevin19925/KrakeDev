@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import { Button, ListItem } from "@rneui/base";
+import { Button, ListItem, FAB } from "@rneui/base";
 import { getAllConstac } from "../rest_cliente/contact";
 import { useState } from "react";
-export const ListaContactos = () => {
+
+export const ListaContactos = ({ navigation }) => {
   const [contactList, setContactList] = useState([]);
 
   const ContactItem = ({ contact }) => {
@@ -25,7 +26,7 @@ export const ListaContactos = () => {
 
   // flatList es como hacer un foreach
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Lista contactos</Text>
       <Button
         title="Consultar"
@@ -41,6 +42,13 @@ export const ListaContactos = () => {
           return <ContactItem contact={item}></ContactItem>;
         }}
       ></FlatList>
+
+      <FAB
+        title="+"
+        onPress={() => {
+          navigation.navigate("ContactsForm");
+        }}
+      />
     </View>
   );
 };
@@ -49,7 +57,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: "column", // eje pricipal es vertical
+    justifyContent: "flex-start",
+    alignItems: "stretch", // orisontal
   },
 });

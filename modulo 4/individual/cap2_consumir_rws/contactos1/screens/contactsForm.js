@@ -1,14 +1,39 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Alert } from "react-native";
 import { Button, ListItem, Input } from "@rneui/base";
 import { useState } from "react";
 import { saveContactRest } from "../rest_cliente/contact";
-export const ContactForm = () => {
+export const ContactForm = ({ navigation }) => {
   const [nombre, setNombre] = useState();
   const [apellido, setApellido] = useState();
   const [telefono, setTelefono] = useState();
 
   const saveContact = () => {
-    saveContactRest({ nom: nombre, ape: apellido, tele: telefono });
+    saveContactRest(
+      { nom: nombre, ape: apellido, tele: telefono },
+      showMessage
+    );
+  };
+
+  const showMessage = () => {
+    Alert.alert(
+      "Título del Alerta",
+      "Mensaje del Alerta",
+      [
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("OK Presionado");
+            navigation.goBack();
+          },
+        },
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar Presionado"),
+          style: "cancel", // Estilo de botón de cancelar
+        },
+      ],
+      { cancelable: false }
+    );
   };
   return (
     <View style={styles.container}>

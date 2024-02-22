@@ -6,7 +6,7 @@ export default function App() {
   const StackContat = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <StackContat.Navigator initialRouteName="ContactsForm">
+      <StackContat.Navigator initialRouteName="ContactsListNav">
         <StackContat.Screen
           name="ContactsListNav"
           component={ListaContactos}

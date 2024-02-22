@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Lista } from "./screens/ScreenLaptop";
+import { Ingreso } from "./screens/screenIngreso";
 export default function App() {
   const Stack = createNativeStackNavigator();
   /*
@@ -15,8 +16,12 @@ export default function App() {
 */
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="LaptopsNav">
         <Stack.Screen name="LaptopsNav" component={Lista}></Stack.Screen>
+        <Stack.Screen
+          name="IngresoLaptopsNav"
+          component={Ingreso}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
