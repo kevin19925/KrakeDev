@@ -1,17 +1,42 @@
 import { Alert, StyleSheet, Text, View } from "react-native";
 import { Button, ListItem } from "@rneui/base";
 import { useState } from "react";
-import { saveRest } from "../rest_Laptops/Laptops";
+import { saveRest, updateRest } from "../rest_Laptops/Laptops";
 import { Input } from "@rneui/themed";
 
-export const Ingreso = ({ navigation }) => {
-  const [marca, setMarca] = useState("");
-  const [procesador, setProcesador] = useState("");
-  const [memoria, setMemoria] = useState("");
+export const Ingreso = ({ navigation, route }) => {
+  // en route el obj que se mando desde el otro form con el mimos nombre .
+  let contactRetrieved = route.params.objLaptop;
+  let isNew = true;
+  if (contactRetrieved != null) {
+    isNew = false;
+  }
 
-  const save = () => {
+  const [marca, setMarca] = useState(isNew ? null : contactRetrieved.marca);
+  const [procesador, setProcesador] = useState(
+    isNew ? null : contactRetrieved.procesador
+  );
+  const [memoria, setMemoria] = useState(
+    isNew ? null : contactRetrieved.memoria
+  );
+  const [id, setId] = useState(isNew ? null : contactRetrieved.id);
+  // resuperando
+  console.log(route.params.objLaptop);
+
+  const crear = () => {
     saveRest(
       { marca: marca, procesador: procesador, memoria: memoria },
+      mostrarAlert
+    );
+  };
+  const actualizar = () => {
+    updateRest(
+      {
+        id: contactRetrieved.id,
+        marca: marca,
+        procesador: procesador,
+        memoria: memoria,
+      },
       mostrarAlert
     );
   };
@@ -19,7 +44,7 @@ export const Ingreso = ({ navigation }) => {
   const mostrarAlert = () => {
     Alert.alert(
       "Título del Alerta",
-      "ingreso correcto",
+      isNew ? "ingreso correcto" : "se edito correctamente",
       [
         {
           text: "OK",
@@ -61,13 +86,7 @@ export const Ingreso = ({ navigation }) => {
           setMemoria(text);
         }}
       ></Input>
-      <Button
-        title="GUARDAR"
-        onPress={
-          //mostrarAlert();
-          save
-        }
-      ></Button>
+      <Button title="GUARDAR" onPress={isNew ? crear : actualizar}></Button>
     </View>
   );
 };

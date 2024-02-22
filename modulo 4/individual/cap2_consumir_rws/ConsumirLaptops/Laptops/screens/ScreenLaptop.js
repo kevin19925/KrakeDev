@@ -1,4 +1,10 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight,
+} from "react-native";
 import { Button, ListItem, FAB } from "@rneui/base";
 import { useState } from "react";
 import { getLaptops } from "../rest_Laptops/Laptops";
@@ -12,16 +18,22 @@ export const Lista = ({ navigation }) => {
 
   const ItemLaptops = ({ laptop }) => {
     return (
-      <ListItem>
-        <ListItem.Content style={styles.item}>
-          <ListItem.Title>
-            {laptop.id} {laptop.marca}
-          </ListItem.Title>
-          <ListItem.Subtitle style={styles.separator}>
-            {laptop.procesador}
-          </ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate("IngresoLaptopsNav", { objLaptop: laptop });
+        }}
+      >
+        <ListItem>
+          <ListItem.Content style={styles.item}>
+            <ListItem.Title>
+              {laptop.id} {laptop.marca}
+            </ListItem.Title>
+            <ListItem.Subtitle style={styles.separator}>
+              {laptop.procesador} <Text>, memoria:</Text> {laptop.memoria}
+            </ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+      </TouchableHighlight>
     );
   };
 
@@ -42,7 +54,7 @@ export const Lista = ({ navigation }) => {
       <FAB
         title="+"
         onPress={() => {
-          navigation.navigate("IngresoLaptopsNav");
+          navigation.navigate("IngresoLaptopsNav", {});
         }}
       />
     </View>
