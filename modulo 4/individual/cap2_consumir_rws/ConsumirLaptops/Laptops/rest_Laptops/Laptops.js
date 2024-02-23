@@ -1,4 +1,4 @@
-const ip = "172.29.30.45";
+const ip = "192.168.100.8";
 // "192.168.100.8";
 const port = 3001;
 const url = "http://" + ip + ":" + port + "/";
@@ -32,7 +32,7 @@ export const saveRest = (laptop, fnshowMessage) => {
       return res.json();
     })
     .then((body) => {
-      fnshowMessage();
+      fnshowMessage("se inserto");
       console.log(body);
     });
 };
@@ -56,7 +56,21 @@ export const updateRest = (laptop, fnshowMessage) => {
       return res.json();
     })
     .then((body) => {
-      fnshowMessage();
+      fnshowMessage("Se actualizo");
+      console.log(body);
+    });
+};
+
+export const deleteRest = (laptop, fnshowMessage) => {
+  const config = {
+    method: "DELETE",
+  };
+  fetch(url + "laptops/" + laptop.id, config)
+    .then((res) => {
+      return res.json();
+    })
+    .then((body) => {
+      fnshowMessage("Se elimino ");
       console.log(body);
     });
 };

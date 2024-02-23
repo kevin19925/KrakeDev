@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { Button, ListItem, FAB } from "@rneui/base";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getLaptops } from "../rest_Laptops/Laptops";
 
 export const Lista = ({ navigation }) => {
@@ -16,6 +16,11 @@ export const Lista = ({ navigation }) => {
     setListaLaptops(contactos);
   };
 
+  useEffect(() => {
+    console.log("usess");
+    getLaptops(refresList);
+  }, []);
+  // como segundo parametro [] para que se ejecute solo un avez
   const ItemLaptops = ({ laptop }) => {
     return (
       <TouchableHighlight
@@ -39,12 +44,6 @@ export const Lista = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Button
-        title="LIST"
-        onPress={() => {
-          getLaptops(refresList);
-        }}
-      ></Button>
       <FlatList
         data={ListaLaptops}
         renderItem={({ item }) => {

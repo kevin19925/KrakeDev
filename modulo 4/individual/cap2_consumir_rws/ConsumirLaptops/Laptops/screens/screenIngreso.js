@@ -1,25 +1,23 @@
 import { Alert, StyleSheet, Text, View } from "react-native";
 import { Button, ListItem } from "@rneui/base";
-import { useState } from "react";
-import { saveRest, updateRest } from "../rest_Laptops/Laptops";
+import { useState, useEffect } from "react";
+import { saveRest, updateRest, deleteRest } from "../rest_Laptops/Laptops";
 import { Input } from "@rneui/themed";
 
 export const Ingreso = ({ navigation, route }) => {
   // en route el obj que se mando desde el otro form con el mimos nombre .
-  let contactRetrieved = route.params.objLaptop;
+  let LapRetrieved = route.params.objLaptop;
   let isNew = true;
-  if (contactRetrieved != null) {
+  if (LapRetrieved != null) {
     isNew = false;
   }
 
-  const [marca, setMarca] = useState(isNew ? null : contactRetrieved.marca);
+  const [marca, setMarca] = useState(isNew ? null : LapRetrieved.marca);
   const [procesador, setProcesador] = useState(
-    isNew ? null : contactRetrieved.procesador
+    isNew ? null : LapRetrieved.procesador
   );
-  const [memoria, setMemoria] = useState(
-    isNew ? null : contactRetrieved.memoria
-  );
-  const [id, setId] = useState(isNew ? null : contactRetrieved.id);
+  const [memoria, setMemoria] = useState(isNew ? null : LapRetrieved.memoria);
+  const [id, setId] = useState(isNew ? null : LapRetrieved.id);
   // resuperando
   console.log(route.params.objLaptop);
 
@@ -32,7 +30,7 @@ export const Ingreso = ({ navigation, route }) => {
   const actualizar = () => {
     updateRest(
       {
-        id: contactRetrieved.id,
+        id: LapRetrieved.id,
         marca: marca,
         procesador: procesador,
         memoria: memoria,
@@ -41,28 +39,30 @@ export const Ingreso = ({ navigation, route }) => {
     );
   };
 
-  const mostrarAlert = () => {
-    Alert.alert(
-      "Título del Alerta",
-      isNew ? "ingreso correcto" : "se edito correctamente",
-      [
-        {
-          text: "OK",
-          onPress: () => {
-            console.log("OK Presionado");
-            navigation.goBack();
-          },
+  const mostrarAlert = (mensaje) => {
+    Alert.alert("Confirmacion", mensaje, [
+      {
+        text: "ok",
+        onPress: () => {
+          navigation.goBack();
         },
-        {
-          text: "Cancelar",
-          onPress: () => console.log("Cancelar Presionado"),
-          style: "cancel", // Estilo de botón de cancelar
-        },
-      ],
-      { cancelable: false }
-    );
+      },
+    ]);
   };
 
+  const confirLaptop = () => {
+    Alert.alert("Confirmacion ", "esta seguro que quiere eliminar", [
+      {
+        text: "SI",
+        onPress: deleteLaptop,
+      },
+      { text: "NO" },
+    ]);
+  };
+
+  const deleteLaptop = () => {
+    deleteRest({ id: LapRetrieved.id }, mostrarAlert);
+  };
   return (
     <View style={styles.container}>
       <Input
@@ -87,6 +87,12 @@ export const Ingreso = ({ navigation, route }) => {
         }}
       ></Input>
       <Button title="GUARDAR" onPress={isNew ? crear : actualizar}></Button>
+
+      {isNew ? (
+        <View></View>
+      ) : (
+        <Button title="ELIMINAR" onPress={confirLaptop}></Button>
+      )}
     </View>
   );
 };
