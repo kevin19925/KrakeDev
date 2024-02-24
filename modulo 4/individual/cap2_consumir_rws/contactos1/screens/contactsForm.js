@@ -1,39 +1,57 @@
 import { View, Text, StyleSheet, FlatList, Alert } from "react-native";
 import { Button, ListItem, Input } from "@rneui/base";
-import { useState } from "react";
-import { saveContactRest } from "../rest_cliente/contact";
-export const ContactForm = ({ navigation }) => {
-  const [nombre, setNombre] = useState();
-  const [apellido, setApellido] = useState();
-  const [telefono, setTelefono] = useState();
+import { useState, useEffect } from "react";
+import { saveRest, updateRest, deleteRest } from "../rest_cliente/contact";
+export const ContactForm = ({ navigation, route }) => {
+  let Retrieved = route.params.objContact;
+  let isNew = true;
+  if (Retrieved != null) {
+    isNew = false;
+  }
 
-  const saveContact = () => {
-    saveContactRest(
-      { nom: nombre, ape: apellido, tele: telefono },
-      showMessage
+  const [nombre, setNombre] = useState(isNew ? null : Retrieved.nombre);
+  const [apellido, setApellido] = useState(isNew ? null : Retrieved.apellido);
+  const [telefono, setTelefono] = useState(isNew ? null : Retrieved.celular);
+  
+  const crear = () => {
+    saveRest({ nom: nombre, ape: apellido, tele: telefono }, mostrarAlert);
+  };
+
+  const actualizar = () => {
+    updateRest(
+      {
+        id: Retrieved.id,
+        nombre: nombre,
+        apellido: apellido,
+        celular: telefono,
+      },
+      mostrarAlert
     );
   };
 
-  const showMessage = () => {
-    Alert.alert(
-      "Título del Alerta",
-      "Mensaje del Alerta",
-      [
-        {
-          text: "OK",
-          onPress: () => {
-            console.log("OK Presionado");
-            navigation.goBack();
-          },
+  const mostrarAlert = (mensaje) => {
+    Alert.alert("Confirmacion", mensaje, [
+      {
+        text: "ok",
+        onPress: () => {
+          navigation.goBack();
         },
-        {
-          text: "Cancelar",
-          onPress: () => console.log("Cancelar Presionado"),
-          style: "cancel", // Estilo de botón de cancelar
-        },
-      ],
-      { cancelable: false }
-    );
+      },
+    ]);
+  };
+
+  const confir = () => {
+    Alert.alert("Confirmacion ", "esta seguro que quiere eliminar", [
+      {
+        text: "SI",
+        onPress: deletec,
+      },
+      { text: "NO" },
+    ]);
+  };
+
+  const deletec = () => {
+    deleteRest({ id: Retrieved.id }, mostrarAlert);
   };
   return (
     <View style={styles.container}>
@@ -59,7 +77,13 @@ export const ContactForm = ({ navigation }) => {
         }}
       ></Input>
 
-      <Button title="GUARDRA" onPress={saveContact}></Button>
+      <Button title="GUARDAR" onPress={isNew ? crear : actualizar}></Button>
+
+      {isNew ? (
+        <View></View>
+      ) : (
+        <Button title="ELIMINAR" onPress={confir}></Button>
+      )}
     </View>
   );
 };

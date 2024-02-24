@@ -1,39 +1,49 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableHighlight,
+} from "react-native";
 import { Button, ListItem, FAB } from "@rneui/base";
 import { getAllConstac } from "../rest_cliente/contact";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const ListaContactos = ({ navigation }) => {
   const [contactList, setContactList] = useState([]);
 
+  fnRefreshList = (contactos) => {
+    setContactList(contactos);
+  };
+
+  useEffect(() => {
+    console.log("usess");
+    getAllConstac(fnRefreshList);
+  }, []);
   const ContactItem = ({ contact }) => {
     // obtengo las prpiedades
     return (
-      <ListItem>
-        <ListItem.Content>
-          <ListItem.Title>
-            {contact.nombre} {contact.apellido}
-          </ListItem.Title>
-          <ListItem.Subtitle>{contact.celular}</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate("ContactsForm", { objContact: contact });
+        }}
+      >
+        <ListItem>
+          <ListItem.Content>
+            <ListItem.Title>
+              {contact.nombre} {contact.apellido}
+            </ListItem.Title>
+            <ListItem.Subtitle>{contact.celular}</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+      </TouchableHighlight>
     );
-  };
-
-  fnRefreshList = (contactos) => {
-    setContactList(contactos);
   };
 
   // flatList es como hacer un foreach
   return (
     <View style={styles.container}>
       <Text>Lista contactos</Text>
-      <Button
-        title="Consultar"
-        onPress={() => {
-          getAllConstac(fnRefreshList);
-        }}
-      ></Button>
 
       <FlatList
         data={contactList}
@@ -46,7 +56,7 @@ export const ListaContactos = ({ navigation }) => {
       <FAB
         title="+"
         onPress={() => {
-          navigation.navigate("ContactsForm");
+          navigation.navigate("ContactsForm",{});
         }}
       />
     </View>

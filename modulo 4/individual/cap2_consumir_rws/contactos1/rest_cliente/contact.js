@@ -13,7 +13,7 @@ export const getAllConstac = (fnRefres) => {
     });
 };
 
-export const saveContactRest = (contact, fnshowMessage) => {
+export const saveRest = (contact, fnshowMessage) => {
   const config = {
     method: "POST",
     headers: {
@@ -63,6 +63,7 @@ export const deleteRest = (contact, fnshowMessage) => {
   const config = {
     method: "DELETE",
   };
+  console.log(url + "contactos/" + contact.id);
   fetch(url + "contactos/" + contact.id, config)
     .then((res) => {
       return res.json();
